@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--
+  UNOFFICIAL PREVIEW. Not a Hayward Area Recreation and Park District website.
+  A replica of https://www.haywardrec.org/238/Aquatics with the typed pool grids replaced
+  by live Pool Relay calendars for Arroyo and the Plunge.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Aquatics &mdash; H.A.R.D. (Pool Relay preview)</title>
+<meta name="description" content="Unofficial preview of the Hayward Area Recreation and Park District aquatics page with live Pool Relay calendars.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:   #095775;   /* H.A.R.D. link blue */
+    --blue-d: #06405a;
+    --green:  #568237;   /* facility heading green */
+    --ink:    #222;
+    --muted:  #5f6a70;
+    --rule:   #dfe4e6;
+    --wash:   #f2f6f7;
+    --amber:  #b5731b;
+    --font: "Jost", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box }
+  html{ -webkit-text-size-adjust:100% }
+  body{ margin:0; background:#fff; color:var(--ink); font-family:var(--font); font-size:16.5px; line-height:1.68 }
+  img{ max-width:100%; display:block }
+  a{ color:var(--blue) }
+
+  .preview-note{
+    background:#2b2b2b;color:#fff;font-size:14px;line-height:1.5;padding:9px 18px;text-align:center;
+  }
+  .preview-note b{ color:#7fc1dd; font-weight:600 }
+  .preview-note a{ color:#fff }
+
+  header.site{ padding:14px 24px; display:flex; align-items:center; gap:18px; border-bottom:1px solid var(--rule) }
+  .hardmark{ display:flex; align-items:center; gap:12px; text-decoration:none }
+  .hardmark .badge{
+    width:52px;height:52px;border-radius:50%;background:var(--green);color:#fff;flex:none;
+    display:grid;place-items:center;font-weight:700;font-size:15px;letter-spacing:.04em;
+  }
+  .hardmark .t{ line-height:1.2 }
+  .hardmark .t b{ display:block; font-size:17px; font-weight:600; color:var(--ink) }
+  .hardmark .t span{ font-size:12.5px; color:var(--muted) }
+  nav.site{ margin-left:auto; display:flex; gap:24px; flex-wrap:wrap }
+  nav.site a{ color:var(--ink); text-decoration:none; font-size:14px; font-weight:500 }
+  nav.site a:hover{ color:var(--blue) }
+
+  .hero{ background:var(--blue-d); color:#fff; padding:26px 24px; text-align:center }
+  .hero p{ margin:0; font-size:clamp(19px,3vw,26px); font-weight:500 }
+
+  .crumbs{ max-width:1180px; margin:0 auto; padding:16px 24px 0; font-size:13.5px; color:var(--muted) }
+  .crumbs a{ text-decoration:none }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px }
+  h1.page{ font-size:clamp(26px,4vw,36px); font-weight:600; margin:16px 0 14px }
+  .intro{ color:var(--muted); margin:0 0 8px }
+
+  .statusrow{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:22px 0 0 }
+  @media (max-width:820px){ .statusrow{ grid-template-columns:1fr } }
+  .status{ border:1px solid var(--rule); border-radius:5px; padding:16px 18px }
+  .status b{ display:block; color:var(--green); font-size:18px; font-weight:600 }
+  .status .tag{
+    display:inline-block; font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+    font-weight:600; padding:3px 9px; border-radius:999px; margin-bottom:8px;
+  }
+  .status.open .tag{ background:#e3f0d9; color:#3f6327 }
+  .status.soon .tag{ background:#fbeeda; color:var(--amber) }
+  .status p{ margin:6px 0 0; font-size:14.5px; color:var(--muted) }
+
+  .cal-band{ background:var(--wash); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+             margin:26px 0 0; padding:26px 24px 30px }
+  .cal-inner{ max-width:1360px; margin:0 auto }
+  .cal-band + .cal-band{ border-top:0 }
+  .cal-head{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:6px }
+  .cal-head h2{ margin:0; font-size:23px; font-weight:600 }
+  .cal-head .live{
+    font-size:11px; font-weight:600; letter-spacing:.11em; text-transform:uppercase;
+    color:#fff; background:var(--green); padding:4px 11px; border-radius:3px;
+  }
+  .cal-head .soon{ background:var(--amber) }
+  .cal-note{ margin:0 0 12px; font-size:14.5px; color:var(--muted) }
+  .frame{ border:1px solid var(--rule); border-radius:4px; overflow:hidden; background:#fff;
+          box-shadow:0 10px 26px rgba(9,87,117,.10) }
+  .frame iframe{ display:block; width:100%; height:720px; border:0 }
+  @media (max-width:760px){ .frame iframe{ height:600px } }
+  .cal-foot{ font-size:14px; color:var(--muted); margin-top:10px }
+
+  .replaces{ max-width:1180px; margin:28px auto 0; padding:0 24px }
+  .replaces h2{ font-size:21px; font-weight:600; margin:0 0 10px }
+  .replaces ul{ margin:0; padding-left:20px; color:var(--muted); font-size:15.5px }
+  .replaces li{ margin-bottom:10px }
+  .replaces .grid{
+    display:inline-block; border:1px solid var(--rule); border-radius:4px; overflow:hidden;
+    font-size:13px; margin-top:6px; background:#fff;
+  }
+  .replaces .grid div{ display:flex }
+  .replaces .grid span{ padding:5px 11px; border-right:1px solid var(--rule); min-width:96px }
+  .replaces .grid .h span{ background:var(--wash); font-weight:600 }
+
+  footer.site{ margin-top:40px; background:var(--blue-d); color:#fff; padding:28px 24px; font-size:14.5px }
+  footer.site .in{ max-width:1180px; margin:0 auto }
+  footer.site a{ color:#fff }
+  footer.site .fine{
+    max-width:1180px; margin:18px auto 0; padding-top:14px;
+    border-top:1px solid rgba(255,255,255,.25); font-size:12.5px; color:#b6d4e0;
+  }
+  @media (max-width:760px){ nav.site{ gap:14px } nav.site a{ font-size:12.5px } body{ font-size:15.5px } }
+</style>
+</head>
+<body>
+
+<div class="preview-note">
+  <b>Unofficial preview.</b> Not a H.A.R.D. page &mdash; a mock-up of
+  <a href="https://www.haywardrec.org/238/Aquatics">haywardrec.org/238/Aquatics</a>
+  showing the typed pool grids replaced by live calendars.
+</div>
+
+<header class="site">
+  <a class="hardmark" href="https://www.haywardrec.org">
+    <span class="badge" aria-hidden="true">HARD</span>
+    <span class="t">
+      <b>Hayward Area Recreation</b>
+      <span>and Park District</span>
+    </span>
+  </a>
+  <nav class="site">
+    <a href="https://www.haywardrec.org/About">About Us</a>
+    <a href="https://www.haywardrec.org/Programs">Programs</a>
+    <a href="https://www.haywardrec.org/Facilities">Facilities</a>
+    <a href="https://www.haywardrec.org/Employment">Employment</a>
+    <a href="https://www.haywardrec.org/238/Aquatics">Aquatics</a>
+  </nav>
+</header>
+
+<div class="hero"><p>So much to do, so close to home!</p></div>
+
+<p class="crumbs"><a href="https://www.haywardrec.org">Home</a> / <a href="https://www.haywardrec.org/Programs">Programs</a> /
+  <a href="https://www.haywardrec.org/238/Aquatics">Aquatics</a></p>
+
+<div class="wrap">
+  <h1 class="page">Aquatics</h1>
+  <p class="intro">Swim lessons are offered year-round, from Parent/Toddler to Adult, all taught by
+    certified American Red Cross instructors. Additional programs include water fitness, camps,
+    lifeguarding and water safety certification, and swim teams and conditioning.</p>
+
+  <div class="statusrow">
+    <div class="status open">
+      <span class="tag">Open now</span>
+      <b>Arroyo Swim Center</b>
+      15701 Lorenzo Avenue, San Lorenzo
+      <p>A six-lane, 25-yard outdoor lap pool, 3.5 to 12 feet deep, plus a small pool.
+        Staying open through September while the Plunge is closed.</p>
+    </div>
+    <div class="status soon">
+      <span class="tag">Reopens 3 October</span>
+      <b>Hayward Plunge</b>
+      24176 Mission Boulevard, Hayward
+      <p>The district&rsquo;s year-round indoor pool, nineteen lanes. Its fall schedule is already
+        in the calendar below &mdash; step forward with the arrows to see it.</p>
+    </div>
+  </div>
+</div>
+
+<section class="cal-band">
+  <div class="cal-inner">
+    <div class="cal-head">
+      <h2>Arroyo Swim Center</h2>
+      <span class="live">Open now</span>
+    </div>
+    <p class="cal-note">Lane by lane, today. Lap swim, water aerobics and lessons all in one place.</p>
+    <div class="frame">
+      <iframe src="https://www.poolrelay.com/embed/I7oc1OICLuHsDCidjXmVMh"
+              title="Arroyo Swim Center schedule"></iframe>
+    </div>
+    <p class="cal-foot">Move between days with the arrows, and tap a programme in the filter to see
+      only that. On a phone the same schedule opens as a list.</p>
+  </div>
+</section>
+
+<section class="cal-band">
+  <div class="cal-inner">
+    <div class="cal-head">
+      <h2>Hayward Plunge</h2>
+      <span class="live soon">Reopens 3 October</span>
+    </div>
+    <p class="cal-note">Empty today, because the pool is closed &mdash; and that is the honest answer.
+      The fall schedule is already loaded: press <strong>&rsaquo;</strong> forward to Saturday
+      3 October and the nineteen lanes fill up.</p>
+    <div class="frame">
+      <iframe src="https://www.poolrelay.com/embed/TDhRrzOg09V15YJQAhwi2V"
+              title="Hayward Plunge schedule"></iframe>
+    </div>
+    <p class="cal-foot">A closed pool shows as a closed pool. Nobody has to remember to take a
+      schedule down, or to put the next one up on the right morning.</p>
+  </div>
+</section>
+
+<div class="replaces">
+  <h2>What this replaces</h2>
+  <ul>
+    <li><strong>A grid of times typed into each facility page.</strong> Arroyo&rsquo;s currently
+      reads like this, and says nothing about which lanes:
+      <span class="grid">
+        <span class="h" style="display:flex"><span>Monday</span><span>Tuesday</span><span>Wednesday</span></span>
+        <div><span>6:00am - 8:45am</span><span>6:00am - 8:45am</span><span>6:00am - 8:45am</span></div>
+        <div><span>10:30am - 1:00pm</span><span>10:30am - 1:00pm</span><span>10:30am - 1:00pm</span></div>
+      </span>
+    </li>
+    <li><strong>Two pools that hand over to each other.</strong> Arroyo is carrying September;
+      the Plunge takes back over on 3 October. In the calendar that is just what the dates say,
+      on both pools, without an announcement that has to be written and later removed.</li>
+    <li><strong>The overview page and the facility page can disagree.</strong> The aquatics
+      overview still describes Arroyo as seasonal &ldquo;June to early August&rdquo;, while
+      Arroyo&rsquo;s own page carries a current schedule. One calendar cannot contradict itself.</li>
+    <li><strong>&ldquo;Please view our Recreation Guide for a detailed listing of classes and
+      times.&rdquo;</strong> The lessons are in here too, each in its own lane.</li>
+  </ul>
+</div>
+
+<footer class="site">
+  <div class="in">
+    <strong>Hayward Area Recreation and Park District</strong><br>
+    Aquatics &mdash; <a href="mailto:aquatics@HaywardRec.org">aquatics@HaywardRec.org</a> &middot; 510-317-2306<br>
+    <a href="https://www.haywardrec.org/238/Aquatics">Aquatics</a> &middot;
+    <a href="https://www.haywardrec.org/Facilities/Facility/Details/Arroyo-Swim-Center-108">Arroyo Swim Center</a> &middot;
+    <a href="https://www.haywardrec.org/Facilities/Facility/Details/Hayward-Plunge-106">Hayward Plunge</a>
+  </div>
+  <p class="fine">This page is an unofficial preview built to demonstrate embedded
+    <a href="https://www.poolrelay.com">Pool Relay</a> calendars. It is not operated by or
+    affiliated with the Hayward Area Recreation and Park District. For official hours, schedules
+    and closures see <a href="https://www.haywardrec.org">haywardrec.org</a>.</p>
+</footer>
+
+</body>
+</html>
